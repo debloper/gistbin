@@ -31,6 +31,38 @@
 
 	<body>
 
+		<header>
+			<h1>GistBin</h1>
+			<h3 class="subheader">Anonymous gists made easy</h3>
+		</header>
+
+		<section class="row collapse">
+			<div class="small-3 large-3 columns">
+				<span class="prefix">Description:</span>
+			</div>
+			<div class="small-9 large-9 columns">
+				<input type="text" id="description" placeholder="What is this Gist all about?">
+			</div>
+			<div class="small-3 large-3 columns">
+				<span class="prefix">Filename:</span>
+			</div>
+			<div class="small-9 large-9 columns">
+				<input type="text" id="filename" placeholder="e.g. README.md">
+			</div>
+			<div class="small-12 large-8 columns">
+				<textarea placeholder="Here be teh codez!" id="content" style="height: auto;"></textarea>
+			</div>
+			<button class="small-12 large-3 columns large button">Get Gist!</button>
+		</section>
+
+		<hr class="row" /><br />
+
+		<section class="row" style="display: none;">
+			<div id="status" class="alert-box"></div>
+			<div id="gist-url" class="large-12 columns"></div>
+			<pre id="gist-content" class="large-12 columns"></pre>
+		</section>
+
 		<!-- Lazy Loadable JS -->
 		<script src="js/jquery.js"></script>
 		<script src="js/foundation.js"></script>
