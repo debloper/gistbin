@@ -50,7 +50,7 @@
 				<input type="text" id="filename" placeholder="e.g. README.md">
 			</div>
 			<div class="small-12 large-8 columns">
-				<textarea placeholder="Here be teh codez!" id="content" style="height: auto;"></textarea>
+				<textarea id="content" placeholder="Here be teh codez!" style="height: auto;"></textarea>
 			</div>
 			<button class="small-12 large-3 columns large button">Get Gist!</button>
 		</section>
@@ -68,6 +68,27 @@
 		<script src="js/foundation.js"></script>
 		<script>
 			$(document).foundation();
+
+			$("button").click(function(){
+				var data = {
+					"description": $("#description").val(),
+					"public": true,
+					"files": {}
+				};
+				data.files[$("#filename").val().toString()] = {
+					"content": $("#content").val()
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "https://api.github.com/gists",
+					data: JSON.stringify(data)
+				}).done(function( response ) {
+					console.log( "PASS:" + response.responseText );
+				}).fail(function( response ) {
+					console.log( "FAIL" + response.responseText );
+				});
+			});
 		</script>
 
 	</body>
