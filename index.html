@@ -84,9 +84,12 @@
 					url: "https://api.github.com/gists",
 					data: JSON.stringify(data)
 				}).done(function( response ) {
-					console.log( "PASS:" + response.responseText );
+					response = JSON.parse(response);
+					$("#status").addClass("success").text("Whoa! You made it...");
+					$("#gist-url").html('<a href="' + response.html_url + '" target="_blank">' + response.html_url + '</a>');
 				}).fail(function( response ) {
-					console.log( "FAIL" + response.responseText );
+					response = JSON.parse(response);
+					$("#status").addClass("alert").text("Nope! Something went wrong..."); });
 				});
 			});
 		</script>
