@@ -89,7 +89,7 @@
 					$("#gist-url").html('<a href="' + response.html_url + '" target="_blank">' + response.html_url + '</a>');
 				}).fail(function( response ) {
 					response = JSON.parse(response);
-					$("#status").addClass("alert").text("Nope! Something went wrong..."); });
+					$("#status").addClass("alert").text("Nope! Something went wrong...");
 				});
 			});
 		</script>
