@@ -36,7 +36,7 @@
 			<h3 class="subheader">Anonymous gists made easy</h3>
 		</header>
 
-		<section class="row collapse">
+		<section id="input" class="row collapse">
 			<div class="small-3 large-3 columns">
 				<span class="prefix">Description:</span>
 			</div>
@@ -57,7 +57,7 @@
 
 		<hr class="row" /><br />
 
-		<section class="row" style="display: none;">
+		<section id="output" class="row" style="display: none;">
 			<div id="status" class="alert-box"></div>
 			<div id="gist-url" class="large-12 columns"></div>
 			<pre id="gist-content" class="large-12 columns"></pre>
@@ -84,12 +84,16 @@
 					url: "https://api.github.com/gists",
 					data: JSON.stringify(data)
 				}).done(function( response ) {
-					response = JSON.parse(response);
 					$("#status").addClass("success").text("Whoa! You made it...");
+					$("#gist-content").text(response);
+					response = JSON.parse(JSON.stringify(response));
 					$("#gist-url").html('<a href="' + response.html_url + '" target="_blank">' + response.html_url + '</a>');
+					$("#output").show();
 				}).fail(function( response ) {
-					response = JSON.parse(response);
+					console.log(response);
+					console.log(JSON.parse(JSON.stringify(response)));
 					$("#status").addClass("alert").text("Nope! Something went wrong...");
+					$("#output").show();
 				});
 			});
 		</script>
