@@ -85,7 +85,7 @@
 					data: JSON.stringify(data)
 				}).done(function( response ) {
 					$("#status").addClass("success").text("Whoa! You made it...");
-					$("#gist-content").text(response);
+					$("#gist-content").text(JSON.stringify(response, null, "\t"));
 					response = JSON.parse(JSON.stringify(response));
 					$("#gist-url").html('<a href="' + response.html_url + '" target="_blank">' + response.html_url + '</a>');
 					$("#output").show();
