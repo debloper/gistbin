@@ -18,6 +18,30 @@
 		<!-- Style sheets -->
 		<link rel="stylesheet" href="css/normalize.css" />
 		<link rel="stylesheet" href="css/foundation.css" />
+		<style>
+		header { text-align: center; }
+		header h1 {
+			color: #555;
+			margin: 3rem auto 0;
+			font-size: 6rem;
+			font-family: "Inder";
+			/* TODO: fix the letter spacing issue in Firefox */
+		}
+		header h3.subheader {
+			margin: -1.5rem auto 2rem;
+			font-size: 2rem;
+			font-family: "Patrick Hand SC";
+			text-decoration: underline;
+		}
+		#status a {
+			padding: 2px 8px;
+			color: rgb(34, 102, 51);
+			border-radius: 4px 4px 4px 4px;
+			background-color: rgba(255, 255, 255, 0.33);
+		}
+		#output .subheader { color: #666; }
+		#credits { margin-bottom: 2rem; }
+		</style>
 
 		<!-- Add web fonts -->
 		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Inder|Patrick+Hand+SC' />
@@ -59,7 +83,11 @@
 
 		<section id="output" class="row" style="display: none;">
 			<div id="status" class="alert-box"></div>
-			<pre id="gist-content" class="large-12 columns"></pre>
+			<div id="response" class="large-12 columns panel">
+				<h3 class="subheader">Server response (prettified JSON):</h3>
+				<hr />
+				<pre id="gist-content"></pre>
+			</div>
 		</section>
 
 		<!-- Lazy Loadable JS -->
