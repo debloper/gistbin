@@ -79,8 +79,6 @@
 			<button class="small-12 large-3 columns large button">Get Gist!</button>
 		</section>
 
-		<hr class="row" /><br />
-
 		<section id="output" class="row" style="display: none;">
 			<div id="status" class="alert-box"></div>
 			<div id="response" class="large-12 columns panel">
@@ -88,6 +86,17 @@
 				<hr />
 				<pre id="gist-content"></pre>
 			</div>
+		</section>
+
+		<hr class="row" /><br />
+
+		<section id="credits" class="row">
+			GistBin is a proof-of-concept toy-prototype by
+			<a href="https://twitter.com/Debloper" target="_blank">@Debloper</a>
+			&mdash; you can
+			<a href="https://github.com/debloper/gistbin" target="_blank">fork it</a>
+			on GitHub under
+			<a href="http://en.wikipedia.org/wiki/WTFPL#Terms">WTFPL</a>.
 		</section>
 
 		<!-- Lazy Loadable JS -->
@@ -133,8 +142,8 @@
 					$("#output").show();
 
 				}).fail(function( response ) {
-					console.log(response);
 					$("#status").addClass("alert").text("Nope! Something went wrong...");
+					$("#gist-content").text('"responseText": ' + response.responseText);
 					$("#output").show();
 				});
 			});
