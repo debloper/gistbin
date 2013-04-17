@@ -81,6 +81,7 @@
 
 				$.ajax({
 					type: "POST",
+					dataType: 'json',
 					url: "https://api.github.com/gists",
 					data: JSON.stringify(data)
 				}).done(function( response ) {
