@@ -59,7 +59,6 @@
 
 		<section id="output" class="row" style="display: none;">
 			<div id="status" class="alert-box"></div>
-			<div id="gist-url" class="large-12 columns"></div>
 			<pre id="gist-content" class="large-12 columns"></pre>
 		</section>
 
@@ -85,14 +84,28 @@
 					url: "https://api.github.com/gists",
 					data: JSON.stringify(data)
 				}).done(function( response ) {
-					$("#status").addClass("success").text("Whoa! You made it...");
-					$("#gist-content").text(JSON.stringify(response, null, "\t"));
-					response = JSON.parse(JSON.stringify(response));
-					$("#gist-url").html('<a href="' + response.html_url + '" target="_blank">' + response.html_url + '</a>');
+
+					// Let's stringify the response for further use
+					var responseString = JSON.stringify(response, null, "\t");
+
+					// Yes, Array concatenation is much faster
+					// than vanilla string concatenation...
+					var successMessage = [
+						'Whoa! You made it... your gist ',
+						'<a href="',
+						response.html_url,
+						'" target="_blank">',
+						response.html_url,
+						'</a> has been created successfully!'
+					].join("");
+
+					// DOM-manipulation time!
+					$("#status").addClass("success").html(successMessage);
+					$("#gist-content").text(responseString);
 					$("#output").show();
+
 				}).fail(function( response ) {
 					console.log(response);
-					console.log(JSON.parse(JSON.stringify(response)));
 					$("#status").addClass("alert").text("Nope! Something went wrong...");
 					$("#output").show();
 				});
