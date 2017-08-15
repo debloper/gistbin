@@ -102,6 +102,26 @@
 		<!-- Lazy Loadable JS -->
 		<script src="js/jquery.js"></script>
 		<script src="js/foundation.js"></script>
+		<!-- BIT.LY CODE -->
+		<script>
+		function get_short_url(long_url, login, api_key, func)
+		{
+			$.getJSON(
+				"http://api.bitly.com/v3/shorten?callback=?", 
+				{ 
+					"format": "json",
+					"apiKey": api_key,
+					"login": login,
+					"longUrl": long_url
+				},
+				function(response)
+				{
+					func(response.data.url);
+				}
+			);
+		}
+		</script>
+		<!-- BIT.LY CODE -->
 		<script>
 			$(document).foundation();
 
@@ -125,22 +145,32 @@
 					// Let's stringify the response for further use
 					var responseString = JSON.stringify(response, null, "\t");
 
+					// started bit.ly code
+					var login = "karlog";
+					var api_key = "R_a5ce119936088b4c14b974410c94f8f9";
+					var long_url = response.html_url;
+					var short__url;
+
+					get_short_url(long_url, login, api_key, function(short_url) {
+						console.log('a'+short_url);
+						short__url = short_url;
+						console.log('b'+short__url);
+					// ended bit.ly code
 					// Yes, Array concatenation is much faster
 					// than vanilla string concatenation...
 					var successMessage = [
 						'Whoa! You made it... your gist ',
 						'<a href="',
-						response.html_url,
+						short__url,
 						'" target="_blank">',
-						response.html_url,
+						short__url,
 						'</a> has been created successfully!'
 					].join("");
-
 					// DOM-manipulation time!
 					$("#status").addClass("success").html(successMessage);
 					$("#gist-content").text(responseString);
 					$("#output").show();
-
+					});
 				}).fail(function( response ) {
 					$("#status").addClass("alert").text("Nope! Something went wrong...");
 					$("#gist-content").text('"responseText": ' + response.responseText);
@@ -148,7 +178,6 @@
 				});
 			});
 		</script>
-
 	</body>
 
 </html>
